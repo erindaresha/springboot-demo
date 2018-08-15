@@ -22,9 +22,6 @@ public class MemberController {
 
   @PostMapping("/api/member")
   public Response<Member> createMember(@RequestParam String username, @RequestParam String name) {
-    Member member = Member.builder()
-        .build();
-
     return ResponseHelper.ok(memberService.createMember(username, name));
   }
 
