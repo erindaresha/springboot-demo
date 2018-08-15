@@ -26,7 +26,7 @@ public class MemberController {
   }
 
   @GetMapping("/api/member/{username}")
-  public Response<Member> createMember(@PathVariable String username) {
+  public Response<Member> getMember(@PathVariable String username) {
     return ResponseHelper.ok(memberService.findMember(username));
   }
 
