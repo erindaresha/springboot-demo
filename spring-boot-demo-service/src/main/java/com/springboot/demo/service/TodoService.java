@@ -8,6 +8,8 @@ public interface TodoService {
 
   Todo createTodo(String username, String title, String description);
 
+  boolean deleteTodo(String username, String title);
+
   List<Todo> getMemberTodos(String username);
 
 }

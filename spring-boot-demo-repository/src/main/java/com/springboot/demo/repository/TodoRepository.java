@@ -8,7 +8,9 @@ import com.springboot.demo.model.entity.Todo;
 
 public interface TodoRepository extends JpaRepository<Todo, String> {
 
-  long countByMember_UsernameAndAndTitle(String username, String title);
+  long countByMember_UsernameAndTitle(String username, String title);
+
+  void deleteByMember_UsernameAndTitle(String username, String title);
 
   List<Todo> findAllByMember_Username(String username);
 

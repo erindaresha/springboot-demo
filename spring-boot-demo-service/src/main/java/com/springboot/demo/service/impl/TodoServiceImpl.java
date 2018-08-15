@@ -29,7 +29,7 @@ public class TodoServiceImpl implements TodoService {
       throw new RuntimeException("Member not found");
     }
 
-    if (todoRepository.countByMember_UsernameAndAndTitle(username, title) > 0) {
+    if (todoRepository.countByMember_UsernameAndTitle(username, title) > 0) {
       throw new RuntimeException("Todo with given title already existed");
     }
 
@@ -41,6 +41,16 @@ public class TodoServiceImpl implements TodoService {
         .build();
 
     return todoRepository.save(todo);
+  }
+
+  @Override
+  public boolean deleteTodo(String username, String title) {
+    if (todoRepository.countByMember_UsernameAndTitle(username, title) == 0) {
+      return false;
+    } else {
+      deleteTodo(username, title);
+      return true;
+    }
   }
 
   @Override
