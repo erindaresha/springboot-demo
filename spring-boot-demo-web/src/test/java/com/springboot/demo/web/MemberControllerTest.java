@@ -35,10 +35,50 @@ public class MemberControllerTest {
   @MockBean
   private TodoService todoService;
 
+  private Member member =
+          Member.builder()
+                  .username("indraep")
+                  .name("Indra")
+                  .build();
+
   @Before
   public void setUp() throws Exception {
     RestAssured.port = serverPort;
   }
+
+  @Test
+  public void createMember(){
+    when(memberService.createMember("indraep", "Indra"))
+            .thenReturn(member);
+
+    RestAssured.given()
+            .param("username","indraep")
+            .param("name", "Indra")
+            .post("/api/member")
+            .then()
+            .body("data.username", equalTo("indraep"))
+            .body("data.name", equalTo("Indra"))
+            .body("code", equalTo(HttpStatus.OK.value()))
+            .statusCode(HttpStatus.OK.value());
+
+    verify(memberService).createMember("indraep", "Indra");
+  }
+
+  /*
+  public void createMember2(){
+    when(memberService.createMember("indraep", "Indra"))
+            .thenReturn(member);
+    RestAssured.given()
+            .body("{\"username\",\"indraep\",\"nama\",\"Indra\"}")
+            .post("/api/member")
+            .then()
+            .body("data.username", equalTo("indraep"))
+            .body("data.name", equalTo("Indra"))
+            .body("code", equalTo(HttpStatus.OK.value()))
+            .statusCode(HttpStatus.OK.value());
+
+    verify(memberService).createMember("indraep", "Indra");
+  }*/
 
   @Test
   public void getMember() {
