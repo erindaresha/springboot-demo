@@ -6,6 +6,6 @@ public interface MemberService {
 
   Member createMember(String username, String name);
 
-  Member findMember(String username);
+  Member getMember(String username);
 
 }

@@ -23,8 +23,14 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public Member findMember(String username) {
-    return memberRepository.findOne(username);
+  public Member getMember(String username) {
+    Member member = memberRepository.findOne(username);
+
+    if (member == null) {
+      throw new RuntimeException("Member not found");
+    } else {
+      return member;
+    }
   }
 
 }

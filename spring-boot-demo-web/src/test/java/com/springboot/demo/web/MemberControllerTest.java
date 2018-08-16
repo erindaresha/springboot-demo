@@ -5,7 +5,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +42,7 @@ public class MemberControllerTest {
 
   @Test
   public void getMember() {
-    when(memberService.findMember("indraep"))
+    when(memberService.getMember("indraep"))
         .thenReturn(Member.builder().username("indraep").name("Indra").build());
 
     RestAssured.given()
@@ -54,7 +53,7 @@ public class MemberControllerTest {
         .body("code", equalTo(HttpStatus.OK.value()))
         .statusCode(HttpStatus.OK.value());
 
-    verify(memberService).findMember("indraep");
+    verify(memberService).getMember("indraep");
   }
 
   @After
